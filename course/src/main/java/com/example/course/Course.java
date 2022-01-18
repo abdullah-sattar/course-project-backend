@@ -17,6 +17,9 @@ public class Course {
     private String duration;
     private String summary;
 
+    public Course() {
+    }
+
     public Course(int id, String name, String category, String location, String price, String duration, String summary) {
         this.id = id;
         this.name = name;
