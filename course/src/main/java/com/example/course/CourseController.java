@@ -1,15 +1,12 @@
-package com.example.courses;
+package com.example.course;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.transaction.Transactional;
 
 @RestController
 public class CourseController {
@@ -28,4 +25,9 @@ public class CourseController {
         return ResponseEntity.status(HttpStatus.OK).body(repository.findCourseByid(Integer.parseInt(id)));
     }
 
+    @PostMapping("/course")
+    public ResponseEntity<String> createCourse(@RequestBody Course course) {
+        repository.save(course);
+        return ResponseEntity.status(HttpStatus.OK).body("Course added");
+    }
 }
