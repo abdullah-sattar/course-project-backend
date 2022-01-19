@@ -5,10 +5,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class CourseController {
 
     @Autowired
@@ -29,5 +31,12 @@ public class CourseController {
     public ResponseEntity<String> createCourse(@RequestBody Course course) {
         repository.save(course);
         return ResponseEntity.status(HttpStatus.OK).body("Course added");
+    }
+
+    @DeleteMapping("/course/{id}")
+    @Transactional
+    public ResponseEntity<String> deleteCourse(@PathVariable String id) {
+        repository.deleteCourseByid(Integer.parseInt(id));
+        return ResponseEntity.status(HttpStatus.OK).body("Course with ID " + id + " has been deleted");
     }
 }

@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CourseRepository extends JpaRepository<Course, String> {
     Course findCourseByid(int id);
+    String deleteCourseByid (int id);
 }
